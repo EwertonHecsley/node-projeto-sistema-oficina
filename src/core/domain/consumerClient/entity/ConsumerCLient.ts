@@ -1,5 +1,6 @@
 import Entity from '../../../generics/Entity';
 import Identity from '../../../generics/Identity';
+import { Vehicle } from '../../vehicle/entity/Vehicle';
 import { DocumentClient } from '../objectValue/Document';
 import { Email } from '../objectValue/Email';
 
@@ -10,6 +11,7 @@ type ConsumerClientProps = {
   phone: string;
   city: string;
   juridicalPerson: boolean;
+  vehicles?: Vehicle[];
 };
 
 export class ConsumerClient extends Entity<ConsumerClientProps> {
@@ -18,13 +20,9 @@ export class ConsumerClient extends Entity<ConsumerClientProps> {
   }
 
   static create(props: ConsumerClientProps, id?: Identity): ConsumerClient {
-    return new ConsumerClient(
-      {
-        ...props,
-      },
-      id,
-    );
+    return new ConsumerClient({ ...props }, id);
   }
+
 
   get name(): string {
     return this.properties.name;
@@ -50,6 +48,11 @@ export class ConsumerClient extends Entity<ConsumerClientProps> {
     return this.properties.juridicalPerson;
   }
 
+
+  get vehicles(): Vehicle[] {
+    return this.properties.vehicles ?? [];
+  }
+
   set name(name: string) {
     this.properties.name = name;
   }
@@ -72,5 +75,17 @@ export class ConsumerClient extends Entity<ConsumerClientProps> {
 
   set juridicalPerson(juridicalPerson: boolean) {
     this.properties.juridicalPerson = juridicalPerson;
+  }
+
+  addVehicle(vehicle: Vehicle): void {
+    if (!this.properties.vehicles) {
+      this.properties.vehicles = [];
+    }
+    this.properties.vehicles.push(vehicle);
+  }
+
+
+  setVehicles(vehicles: Vehicle[]): void {
+    this.properties.vehicles = vehicles;
   }
 }

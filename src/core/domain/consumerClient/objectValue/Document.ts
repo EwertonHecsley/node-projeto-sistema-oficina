@@ -16,7 +16,15 @@ export class DocumentClient {
     }
   }
 
-  get documentValue(): CPF | CNPJ {
-    return this.value;
+  get documentValue(): string {
+    if (this.value instanceof CPF) {
+      return this.value.valueCpf;
+    }
+
+    if (this.value instanceof CNPJ) {
+      return this.value.valueCnpj;
+    }
+
+    throw new Error('Invalid document type.');
   }
 }

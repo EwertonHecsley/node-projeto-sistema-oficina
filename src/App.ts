@@ -9,7 +9,6 @@ export class App {
   async bootstrap() {
     this.validate();
     await DatabaseConnection.getInstance().checkConnection();
-    this.connectDatabase();
     this.startServer();
     this.handleGracefulShutdown();
   }
@@ -17,10 +16,6 @@ export class App {
   private async startServer() {
     await app.listen({ port: this.port });
     logger.info(`🟢  Server is running on port ${this.port}`);
-  }
-
-  private connectDatabase() {
-    DatabaseConnection.getInstance();
   }
 
   private validate() {

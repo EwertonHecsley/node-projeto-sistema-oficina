@@ -1,26 +1,23 @@
 import { NotFound } from '../../../../shared/errors/custom/NotFound';
 import { Either, left, right } from '../../../../shared/utils/either';
-import { Vehicle } from '../entity/Vehicle';
 import { VehicleRepositoy } from '../repository/VehicleRepository';
 
 type Request = {
   id: string;
 };
 
-type Response = Either<NotFound, Vehicle>;
+type Response = Either<NotFound, boolean>;
 
-export class FindVehicleUseCase {
+export class DeleteVehicleUseCase {
   constructor(private readonly vehicleRepository: VehicleRepositoy) {}
 
-  async execute(data: Request): Promise<Response> {
-    const { id } = data;
-
+  async execute({ id }: Request): Promise<Response> {
     const vehicle = await this.vehicleRepository.findById(id);
 
-    if (!vehicle) {
-      return left(new NotFound('Veículo não encontrado'));
-    }
+    if (!vehicle) return left(new NotFound('Veiculo nao encontrado.'));
 
-    return right(vehicle);
+    await this.vehicleRepository.delete(id);
+
+    return right(true);
   }
 }

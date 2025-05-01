@@ -23,7 +23,6 @@ export class ConsumerClient extends Entity<ConsumerClientProps> {
     return new ConsumerClient({ ...props }, id);
   }
 
-
   get name(): string {
     return this.properties.name;
   }
@@ -47,7 +46,6 @@ export class ConsumerClient extends Entity<ConsumerClientProps> {
   get juridicalPerson(): boolean {
     return this.properties.juridicalPerson;
   }
-
 
   get vehicles(): Vehicle[] {
     return this.properties.vehicles ?? [];
@@ -83,7 +81,6 @@ export class ConsumerClient extends Entity<ConsumerClientProps> {
     }
     this.properties.vehicles.push(vehicle);
   }
-
 
   setVehicles(vehicles: Vehicle[]): void {
     this.properties.vehicles = vehicles;

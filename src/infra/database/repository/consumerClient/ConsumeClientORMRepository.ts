@@ -4,7 +4,10 @@ import { ClientRepositoy } from '../../../../core/domain/consumerClient/reposito
 import { DatabaseConnection } from '../../drizzle/DatabaseConnection';
 import { ConsumerClientMapper } from '../../drizzle/mappers/ConsumerClientMapper';
 import { VehicleMapper } from '../../drizzle/mappers/VehicleMapper';
-import { consumerClient as consumerClientSchema, vehicle as vehicleSchema } from '../../drizzle/schema';
+import {
+  consumerClient as consumerClientSchema,
+  vehicle as vehicleSchema,
+} from '../../drizzle/schema';
 
 export class ConsumerClietOrmRepository implements ClientRepositoy {
   private database = DatabaseConnection.getInstance();
@@ -28,13 +31,16 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
 
     const allVehicles = await this.database.db.select().from(vehicleSchema);
 
-    const groupedVehicles = allVehicles.reduce<Record<string, typeof allVehicles>>((acc, vehicle) => {
-      if (!acc[vehicle.clientId]) {
-        acc[vehicle.clientId] = [];
-      }
-      acc[vehicle.clientId].push(vehicle);
-      return acc;
-    }, {});
+    const groupedVehicles = allVehicles.reduce<Record<string, typeof allVehicles>>(
+      (acc, vehicle) => {
+        if (!acc[vehicle.clientId]) {
+          acc[vehicle.clientId] = [];
+        }
+        acc[vehicle.clientId].push(vehicle);
+        return acc;
+      },
+      {},
+    );
 
     return result.map((client) => {
       const clientVehicles = groupedVehicles[client.id] || [];
@@ -106,8 +112,6 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
   }
 
   async deleteClient(id: string): Promise<void> {
-    await this.database.db
-      .delete(consumerClientSchema)
-      .where(eq(consumerClientSchema.id, id));
+    await this.database.db.delete(consumerClientSchema).where(eq(consumerClientSchema.id, id));
   }
 }

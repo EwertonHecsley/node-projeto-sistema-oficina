@@ -1,23 +1,29 @@
 import Entity from '../../../generics/Entity';
+import Identity from '../../../generics/Identity';
 
 type VehicleType = {
-  plate: string;
+    plate: string;
 };
 
 export class Vehicle extends Entity<VehicleType> {
-  private constructor(plate: string) {
-    super({ plate });
-  }
+    private constructor(plate: VehicleType, id?: Identity) {
+        super(plate, id);
+    }
 
-  static create(plate: string): Vehicle {
-    return new Vehicle(plate);
-  }
+    static create(plate: VehicleType, id?: Identity): Vehicle {
+        return new Vehicle(
+            {
+                ...plate
+            },
+            id
+        );
+    }
 
-  get plate(): string {
-    return this.properties.plate;
-  }
+    get plate(): string {
+        return this.properties.plate;
+    }
 
-  set plate(plate: string) {
-    this.properties.plate = plate;
-  }
+    set plate(plate: string) {
+        this.properties.plate = plate;
+    }
 }

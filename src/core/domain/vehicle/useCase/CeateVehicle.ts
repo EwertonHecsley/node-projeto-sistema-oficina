@@ -24,7 +24,7 @@ export class CreateVehicleUseCase {
             return left(new BadRequest('Placa já cadastrada'));
         }
 
-        const vehicle = Vehicle.create(plate);
+        const vehicle = Vehicle.create({ plate });
 
         const createdVehicle = await this.vehicleRepository.create(vehicle);
 

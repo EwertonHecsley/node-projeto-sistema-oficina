@@ -103,7 +103,7 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
   }
 
   async updateClient(id: string, client: ConsumerClient): Promise<void> {
-    const data = ConsumerClientMapper.toPersistence(client);
+    const data = ConsumerClientMapper.toPersistence(client, true);
 
     await this.database.db
       .update(consumerClientSchema)

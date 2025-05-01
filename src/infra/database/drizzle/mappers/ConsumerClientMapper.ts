@@ -9,7 +9,7 @@ type InsertClient = typeof consumerClient.$inferInsert;
 type SelectClient = typeof consumerClient.$inferSelect;
 
 export class ConsumerClientMapper {
-  static toPersistence(client: ConsumerClient): InsertClient {
+  static toPersistence(client: ConsumerClient, isUpdate: boolean = false): InsertClient {
     return {
       id: client.valueId.valueId,
       name: client.name,
@@ -18,7 +18,7 @@ export class ConsumerClientMapper {
       city: client.city,
       phone: client.phone,
       juridicalPerson: client.juridicalPerson,
-      createdAt: new Date(),
+      ...(isUpdate ? {} : { createdAt: new Date() }),
     };
   }
 

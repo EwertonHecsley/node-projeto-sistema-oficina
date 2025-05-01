@@ -3,6 +3,7 @@ import { DocumentClient } from '../../../../core/domain/consumerClient/objectVal
 import { Email } from '../../../../core/domain/consumerClient/objectValue/Email';
 import Identity from '../../../../core/generics/Identity';
 import { consumerClient } from '../schema';
+import { Vehicle } from '../../../../core/domain/vehicle/entity/Vehicle';
 
 type InsertClient = typeof consumerClient.$inferInsert;
 type SelectClient = typeof consumerClient.$inferSelect;
@@ -21,8 +22,8 @@ export class ConsumerClientMapper {
     };
   }
 
-  static toDomain(raw: SelectClient): ConsumerClient {
-    return ConsumerClient.create(
+  static toDomain(raw: SelectClient, vehicles: Vehicle[] = []): ConsumerClient {
+    const client = ConsumerClient.create(
       {
         name: raw.name,
         city: raw.city,
@@ -33,5 +34,8 @@ export class ConsumerClientMapper {
       },
       new Identity(raw.id),
     );
+
+    client.setVehicles(vehicles);
+    return client;
   }
 }

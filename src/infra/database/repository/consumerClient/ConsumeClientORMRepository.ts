@@ -3,7 +3,8 @@ import { ConsumerClient } from '../../../../core/domain/consumerClient/entity/Co
 import { ClientRepositoy } from '../../../../core/domain/consumerClient/repository/ClientRepository';
 import { DatabaseConnection } from '../../drizzle/DatabaseConnection';
 import { ConsumerClientMapper } from '../../drizzle/mappers/ConsumerClientMapper';
-import { consumerClient as consumerClientSchema } from '../../drizzle/schema';
+import { VehicleMapper } from '../../drizzle/mappers/VehicleMapper';
+import { consumerClient as consumerClientSchema, vehicle as vehicleSchema } from '../../drizzle/schema';
 
 export class ConsumerClietOrmRepository implements ClientRepositoy {
   private database = DatabaseConnection.getInstance();
@@ -16,7 +17,7 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
       .values(data)
       .returning();
 
-    return ConsumerClientMapper.toDomain(newClient);
+    return ConsumerClientMapper.toDomain(newClient, client.vehicles);
   }
 
   async getAllClients(): Promise<ConsumerClient[]> {
@@ -25,7 +26,21 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
       .from(consumerClientSchema)
       .orderBy(consumerClientSchema.name);
 
-    return result.map((element) => ConsumerClientMapper.toDomain(element));
+    const allVehicles = await this.database.db.select().from(vehicleSchema);
+
+    const groupedVehicles = allVehicles.reduce<Record<string, typeof allVehicles>>((acc, vehicle) => {
+      if (!acc[vehicle.clientId]) {
+        acc[vehicle.clientId] = [];
+      }
+      acc[vehicle.clientId].push(vehicle);
+      return acc;
+    }, {});
+
+    return result.map((client) => {
+      const clientVehicles = groupedVehicles[client.id] || [];
+      const domainVehicles = clientVehicles.map(VehicleMapper.toDomain);
+      return ConsumerClientMapper.toDomain(client, domainVehicles);
+    });
   }
 
   async getClientByDocType(docType: string): Promise<ConsumerClient | null> {
@@ -34,7 +49,15 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
       .from(consumerClientSchema)
       .where(eq(consumerClientSchema.docType, docType));
 
-    return ConsumerClientMapper.toDomain(clientByDoc);
+    if (!clientByDoc) return null;
+
+    const vehiclesRaw = await this.database.db
+      .select()
+      .from(vehicleSchema)
+      .where(eq(vehicleSchema.clientId, clientByDoc.id));
+
+    const vehicles = vehiclesRaw.map(VehicleMapper.toDomain);
+    return ConsumerClientMapper.toDomain(clientByDoc, vehicles);
   }
 
   async getClientByEmail(email: string): Promise<ConsumerClient | null> {
@@ -43,7 +66,15 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
       .from(consumerClientSchema)
       .where(eq(consumerClientSchema.email, email));
 
-    return ConsumerClientMapper.toDomain(clientByEmail);
+    if (!clientByEmail) return null;
+
+    const vehiclesRaw = await this.database.db
+      .select()
+      .from(vehicleSchema)
+      .where(eq(vehicleSchema.clientId, clientByEmail.id));
+
+    const vehicles = vehiclesRaw.map(VehicleMapper.toDomain);
+    return ConsumerClientMapper.toDomain(clientByEmail, vehicles);
   }
 
   async getClientById(id: string): Promise<ConsumerClient | null> {
@@ -52,7 +83,17 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
       .from(consumerClientSchema)
       .where(eq(consumerClientSchema.id, id));
 
-    return ConsumerClientMapper.toDomain(clientById);
+    if (!clientById) {
+      return null;
+    }
+
+    const vehiclesRaw = await this.database.db
+      .select()
+      .from(vehicleSchema)
+      .where(eq(vehicleSchema.clientId, id));
+
+    const vehicles = vehiclesRaw.map(VehicleMapper.toDomain);
+    return ConsumerClientMapper.toDomain(clientById, vehicles);
   }
 
   async updateClient(id: string, client: ConsumerClient): Promise<void> {
@@ -65,6 +106,8 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
   }
 
   async deleteClient(id: string): Promise<void> {
-    await this.database.db.delete(consumerClientSchema).where(eq(consumerClientSchema.id, id));
+    await this.database.db
+      .delete(consumerClientSchema)
+      .where(eq(consumerClientSchema.id, id));
   }
 }

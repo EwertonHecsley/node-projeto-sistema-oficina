@@ -13,7 +13,7 @@ CREATE TABLE "clients" (
 --> statement-breakpoint
 CREATE TABLE "vehicles" (
 	"id" uuid PRIMARY KEY NOT NULL,
-	"client_id" uuid NOT NULL,
+	"client_id" uuid,
 	"plate" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "vehicles_plate_unique" UNIQUE("plate")

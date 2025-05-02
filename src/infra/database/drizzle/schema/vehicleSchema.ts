@@ -3,9 +3,7 @@ import { consumerClient } from './consumerClientSchema';
 
 export const vehicle = pgTable('vehicles', {
   id: uuid('id').primaryKey(),
-  clientId: uuid('client_id')
-    .notNull()
-    .references(() => consumerClient.id),
+  clientId: uuid('client_id').references(() => consumerClient.id),
   plate: text('plate').notNull().unique(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });

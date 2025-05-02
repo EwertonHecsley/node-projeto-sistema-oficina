@@ -1,5 +1,5 @@
 {
-  "id": "31a17cc5-1563-41ae-bba9-0d9243528d2b",
+  "id": "c96e03d1-5eb5-4efb-bb9d-df0be04a35ea",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -91,7 +91,7 @@
           "name": "client_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "plate": {
           "name": "plate",

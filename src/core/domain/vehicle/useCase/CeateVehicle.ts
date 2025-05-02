@@ -20,6 +20,7 @@ export class CreateVehicleUseCase {
     }
 
     const plateExists = await this.vehicleRepository.findByPlate(plate);
+
     if (plateExists) {
       return left(new BadRequest('Placa já cadastrada'));
     }

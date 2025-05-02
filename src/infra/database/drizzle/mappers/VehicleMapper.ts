@@ -6,7 +6,7 @@ type InsertVehicle = typeof vehicle.$inferInsert;
 type SelectVehicle = typeof vehicle.$inferSelect;
 
 export class VehicleMapper {
-  static toPersistence(vehicle: Vehicle, clientId: string): InsertVehicle {
+  static toPersistence(vehicle: Vehicle, clientId?: string): InsertVehicle {
     return {
       id: vehicle.valueId.valueId,
       plate: vehicle.plate,

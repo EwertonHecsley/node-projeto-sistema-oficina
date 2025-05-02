@@ -9,27 +9,37 @@ export class VehicleOrmRepository implements VehicleRepositoy {
   private database = DatabaseConnection.getInstance();
 
   async create(entity: Vehicle): Promise<Vehicle> {
-    const data = VehicleMapper.toPersistence(entity, entity.valueId.valueId);
-
-    const [created] = await this.database.db.insert(vehicleSchema).values(data).returning();
+    const data = VehicleMapper.toPersistence(entity);
+    const [created] = await this.database.db
+      .insert(vehicleSchema)
+      .values({ ...data })
+      .returning();
 
     return VehicleMapper.toDomain(created);
   }
 
-  async findById(id: string): Promise<Vehicle> {
+  async findById(id: string): Promise<Vehicle | undefined> {
     const [found] = await this.database.db
       .select()
       .from(vehicleSchema)
       .where(eq(vehicleSchema.id, id));
 
+    if (!found) {
+      return undefined;
+    }
+
     return VehicleMapper.toDomain(found);
   }
 
-  async findByPlate(plate: string): Promise<Vehicle> {
+  async findByPlate(plate: string): Promise<Vehicle | undefined> {
     const [found] = await this.database.db
       .select()
       .from(vehicleSchema)
       .where(eq(vehicleSchema.plate, plate));
+
+    if (!found) {
+      return undefined;
+    }
 
     return VehicleMapper.toDomain(found);
   }
@@ -44,7 +54,7 @@ export class VehicleOrmRepository implements VehicleRepositoy {
   }
 
   async update(entity: Vehicle): Promise<Vehicle> {
-    const data = VehicleMapper.toPersistence(entity, entity.valueId.valueId);
+    const data = VehicleMapper.toPersistence(entity);
 
     const [updated] = await this.database.db
       .update(vehicleSchema)

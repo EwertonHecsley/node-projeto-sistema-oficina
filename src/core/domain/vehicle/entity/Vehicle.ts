@@ -6,17 +6,12 @@ type VehicleType = {
 };
 
 export class Vehicle extends Entity<VehicleType> {
-  private constructor(plate: VehicleType, id?: Identity) {
-    super(plate, id);
+  private constructor(props: VehicleType, id?: Identity) {
+    super(props, id);
   }
 
-  static create(plate: VehicleType, id?: Identity): Vehicle {
-    return new Vehicle(
-      {
-        ...plate,
-      },
-      id,
-    );
+  static create(props: VehicleType, id?: Identity): Vehicle {
+    return new Vehicle(props, id);
   }
 
   get plate(): string {

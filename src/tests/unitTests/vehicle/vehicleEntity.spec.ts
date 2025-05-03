@@ -1,5 +1,5 @@
-import { Vehicle } from '../../core/domain/vehicle/entity/Vehicle';
-import Identity from '../../core/generics/Identity';
+import { Vehicle } from '../../../core/domain/vehicle/entity/Vehicle';
+import Identity from '../../../core/generics/Identity';
 
 describe('Vehicle Entity', () => {
   it('deve criar um veículo com placa corretamente', () => {

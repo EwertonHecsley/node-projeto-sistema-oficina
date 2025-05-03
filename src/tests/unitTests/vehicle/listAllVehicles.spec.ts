@@ -1,6 +1,6 @@
-import { Vehicle } from '../../core/domain/vehicle/entity/Vehicle';
-import { VehicleRepositoy } from '../../core/domain/vehicle/repository/VehicleRepository';
-import { ListAllVehiclesUseCase } from '../../core/domain/vehicle/useCase/LisAllVehicles';
+import { Vehicle } from '../../../core/domain/vehicle/entity/Vehicle';
+import { VehicleRepositoy } from '../../../core/domain/vehicle/repository/VehicleRepository';
+import { ListAllVehiclesUseCase } from '../../../core/domain/vehicle/useCase/LisAllVehicles';
 
 const mockVehicleRepository = {
   findAll: jest.fn(),

@@ -1,9 +1,9 @@
-import { ConsumerClient } from '../../core/domain/consumerClient/entity/ConsumerCLient';
-import { DocumentClient } from '../../core/domain/consumerClient/objectValue/Document';
-import { Email } from '../../core/domain/consumerClient/objectValue/Email';
-import { FindConsumerClientUseCase } from '../../core/domain/consumerClient/useCase/FindClient';
-import Identity from '../../core/generics/Identity';
-import { NotFound } from '../../shared/errors/custom/NotFound';
+import { ConsumerClient } from '../../../core/domain/consumerClient/entity/ConsumerCLient';
+import { DocumentClient } from '../../../core/domain/consumerClient/objectValue/Document';
+import { Email } from '../../../core/domain/consumerClient/objectValue/Email';
+import { FindConsumerClientUseCase } from '../../../core/domain/consumerClient/useCase/FindClient';
+import Identity from '../../../core/generics/Identity';
+import { NotFound } from '../../../shared/errors/custom/NotFound';
 
 const mockRepository = {
   getClientById: jest.fn(),

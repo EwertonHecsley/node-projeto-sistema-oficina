@@ -1,7 +1,7 @@
-import { Vehicle } from '../../core/domain/vehicle/entity/Vehicle';
-import { VehicleRepositoy } from '../../core/domain/vehicle/repository/VehicleRepository';
-import { DeleteVehicleUseCase } from '../../core/domain/vehicle/useCase/DelteVehicle';
-import { NotFound } from '../../shared/errors/custom/NotFound';
+import { Vehicle } from '../../../core/domain/vehicle/entity/Vehicle';
+import { VehicleRepositoy } from '../../../core/domain/vehicle/repository/VehicleRepository';
+import { DeleteVehicleUseCase } from '../../../core/domain/vehicle/useCase/DelteVehicle';
+import { NotFound } from '../../../shared/errors/custom/NotFound';
 
 const mockVehicleRepository = {
   findById: jest.fn(),

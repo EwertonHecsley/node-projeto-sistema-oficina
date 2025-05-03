@@ -1,11 +1,11 @@
-import { ConsumerClient } from '../../core/domain/consumerClient/entity/ConsumerCLient';
-import { DocumentClient } from '../../core/domain/consumerClient/objectValue/Document';
-import { Email } from '../../core/domain/consumerClient/objectValue/Email';
-import { ClientRepositoy } from '../../core/domain/consumerClient/repository/ClientRepository';
-import { UpdateConsumerClientUseCase } from '../../core/domain/consumerClient/useCase/UpdateClient';
-import { BadRequest } from '../../shared/errors/custom/BadRequest';
-import { NotFound } from '../../shared/errors/custom/NotFound';
-import { left } from '../../shared/utils/either';
+import { ConsumerClient } from '../../../core/domain/consumerClient/entity/ConsumerCLient';
+import { DocumentClient } from '../../../core/domain/consumerClient/objectValue/Document';
+import { Email } from '../../../core/domain/consumerClient/objectValue/Email';
+import { ClientRepositoy } from '../../../core/domain/consumerClient/repository/ClientRepository';
+import { UpdateConsumerClientUseCase } from '../../../core/domain/consumerClient/useCase/UpdateClient';
+import { BadRequest } from '../../../shared/errors/custom/BadRequest';
+import { NotFound } from '../../../shared/errors/custom/NotFound';
+import { left } from '../../../shared/utils/either';
 
 const mockRepo = {
   getClientById: jest.fn(),

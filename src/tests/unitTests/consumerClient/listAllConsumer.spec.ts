@@ -1,8 +1,8 @@
-import { ConsumerClient } from '../../core/domain/consumerClient/entity/ConsumerCLient';
-import { DocumentClient } from '../../core/domain/consumerClient/objectValue/Document';
-import { Email } from '../../core/domain/consumerClient/objectValue/Email';
-import { ListAllConsumerClientUseCase } from '../../core/domain/consumerClient/useCase/ListAllClients';
-import Identity from '../../core/generics/Identity';
+import { ConsumerClient } from '../../../core/domain/consumerClient/entity/ConsumerCLient';
+import { DocumentClient } from '../../../core/domain/consumerClient/objectValue/Document';
+import { Email } from '../../../core/domain/consumerClient/objectValue/Email';
+import { ListAllConsumerClientUseCase } from '../../../core/domain/consumerClient/useCase/ListAllClients';
+import Identity from '../../../core/generics/Identity';
 
 describe('ListAllConsumerClientUseCase', () => {
   const mockRepository = {

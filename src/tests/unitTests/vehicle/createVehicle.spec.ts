@@ -1,7 +1,7 @@
-import { Vehicle } from '../../core/domain/vehicle/entity/Vehicle';
-import { VehicleRepositoy } from '../../core/domain/vehicle/repository/VehicleRepository';
-import { CreateVehicleUseCase } from '../../core/domain/vehicle/useCase/CeateVehicle';
-import { BadRequest } from '../../shared/errors/custom/BadRequest';
+import { Vehicle } from '../../../core/domain/vehicle/entity/Vehicle';
+import { VehicleRepositoy } from '../../../core/domain/vehicle/repository/VehicleRepository';
+import { CreateVehicleUseCase } from '../../../core/domain/vehicle/useCase/CeateVehicle';
+import { BadRequest } from '../../../shared/errors/custom/BadRequest';
 
 const mockVehicleRepository = {
   findByPlate: jest.fn(),

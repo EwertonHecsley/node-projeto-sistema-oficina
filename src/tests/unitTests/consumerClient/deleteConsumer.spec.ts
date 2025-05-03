@@ -1,9 +1,9 @@
-import { ConsumerClient } from '../../core/domain/consumerClient/entity/ConsumerCLient';
-import { DocumentClient } from '../../core/domain/consumerClient/objectValue/Document';
-import { Email } from '../../core/domain/consumerClient/objectValue/Email';
-import { DeleteConsumerClientUseCase } from '../../core/domain/consumerClient/useCase/Delete';
-import Identity from '../../core/generics/Identity';
-import { NotFound } from '../../shared/errors/custom/NotFound';
+import { ConsumerClient } from '../../../core/domain/consumerClient/entity/ConsumerCLient';
+import { DocumentClient } from '../../../core/domain/consumerClient/objectValue/Document';
+import { Email } from '../../../core/domain/consumerClient/objectValue/Email';
+import { DeleteConsumerClientUseCase } from '../../../core/domain/consumerClient/useCase/Delete';
+import Identity from '../../../core/generics/Identity';
+import { NotFound } from '../../../shared/errors/custom/NotFound';
 
 describe('DeleteConsumerClientUseCase', () => {
   const mockRepository = {

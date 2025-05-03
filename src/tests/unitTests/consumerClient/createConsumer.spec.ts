@@ -1,12 +1,10 @@
-import { ConsumerClient } from '../../core/domain/consumerClient/entity/ConsumerCLient';
-import { DocumentClient } from '../../core/domain/consumerClient/objectValue/Document';
-import { Email } from '../../core/domain/consumerClient/objectValue/Email';
-import { ClientRepositoy } from '../../core/domain/consumerClient/repository/ClientRepository';
-import { CreateConsumerClientUseCase } from '../../core/domain/consumerClient/useCase/Create';
-import Identity from '../../core/generics/Identity';
-import { BadRequest } from '../../shared/errors/custom/BadRequest';
+import { ConsumerClient } from '../../../core/domain/consumerClient/entity/ConsumerCLient';
+import { DocumentClient } from '../../../core/domain/consumerClient/objectValue/Document';
+import { Email } from '../../../core/domain/consumerClient/objectValue/Email';
+import { ClientRepositoy } from '../../../core/domain/consumerClient/repository/ClientRepository';
+import { CreateConsumerClientUseCase } from '../../../core/domain/consumerClient/useCase/Create';
+import { BadRequest } from '../../../shared/errors/custom/BadRequest';
 
-// Ajustando o mock do repositório
 const makeMockRepository = (): jest.Mocked<ClientRepositoy> => ({
   getClientByEmail: jest.fn(),
   getClientByDocType: jest.fn(),

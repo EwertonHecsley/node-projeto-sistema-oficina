@@ -1,8 +1,7 @@
-import { ConsumerClient } from '../../core/domain/consumerClient/entity/ConsumerCLient';
-import { DocumentClient } from '../../core/domain/consumerClient/objectValue/Document';
-import { Email } from '../../core/domain/consumerClient/objectValue/Email';
-import Identity from '../../core/generics/Identity';
-import { BadRequest } from '../../shared/errors/custom/BadRequest';
+import { ConsumerClient } from '../../../core/domain/consumerClient/entity/ConsumerCLient';
+import { DocumentClient } from '../../../core/domain/consumerClient/objectValue/Document';
+import { Email } from '../../../core/domain/consumerClient/objectValue/Email';
+import Identity from '../../../core/generics/Identity';
 
 describe('ConsumerClient', () => {
   const validProps = {

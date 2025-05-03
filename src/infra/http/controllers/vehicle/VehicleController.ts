@@ -10,6 +10,7 @@ import { NotFound } from '../../../../shared/errors/custom/NotFound';
 import { UpdateVehicleDto } from './dto/vehicleUpdateSchemaDto';
 import { UpdateVehicleUseCase } from '../../../../core/domain/vehicle/useCase/updateVehicle';
 import { logger } from '../../../../shared/utils/logger';
+import { vehicleIdParamSchema } from './dto/vehicleParamsSchemaDto';
 
 export class VehicleController {
   private readonly repository = new VehicleOrmRepository();
@@ -55,7 +56,15 @@ export class VehicleController {
   }
 
   async index(request: FastifyRequest, reply: FastifyReply): Promise<void> {
-    const id = request.params as string;
+    const parseResult = vehicleIdParamSchema.safeParse(request.params);
+
+    logger.error('Dados invalidos na requisicao.');
+    if (!parseResult.success) {
+      reply.status(400).send({ message: 'Parâmetros inválidos.' });
+      return;
+    }
+
+    const { id } = parseResult.data;
 
     logger.info('Buscando veiculo');
     const result = await this.findVehicleUseCase.execute({ id });
@@ -66,6 +75,7 @@ export class VehicleController {
       return;
     }
 
+    logger.info('Veiculo encontrado com sucesso.');
     reply.status(200).send({
       message: 'Veiculo encontrado com sucesso.',
       vehicle: VehiclePresenter.toHTTP(result.value),
@@ -73,7 +83,15 @@ export class VehicleController {
   }
 
   async destroy(request: FastifyRequest, reply: FastifyReply): Promise<void> {
-    const id = request.params as string;
+    const parseResult = vehicleIdParamSchema.safeParse(request.params);
+
+    logger.error('Dados invalidos na requisicao.');
+    if (!parseResult.success) {
+      reply.status(400).send({ message: 'Parâmetros inválidos.' });
+      return;
+    }
+
+    const { id } = parseResult.data;
 
     logger.info('Deletando veiculo...');
     const result = await this.deleteVehicleUseCase.execute({ id });
@@ -89,8 +107,16 @@ export class VehicleController {
   }
 
   async update(request: FastifyRequest, reply: FastifyReply): Promise<void> {
-    const id = request.params as string;
+    const parseResult = vehicleIdParamSchema.safeParse(request.params);
     const { plate } = request.body as UpdateVehicleDto;
+
+    logger.error('Dados invalidos na requisicao.');
+    if (!parseResult.success) {
+      reply.status(400).send({ message: 'Parâmetros inválidos.' });
+      return;
+    }
+
+    const { id } = parseResult.data;
 
     logger.info('Atualizando veiculo...');
     const result = await this.updateVehicleUseCase.execute({ id, plate });

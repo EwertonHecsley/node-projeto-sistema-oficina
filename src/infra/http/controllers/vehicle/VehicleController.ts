@@ -13,12 +13,19 @@ import { logger } from '../../../../shared/utils/logger';
 import { vehicleIdParamSchema } from './dto/vehicleParamsSchemaDto';
 
 export class VehicleController {
-  private readonly repository = new VehicleOrmRepository();
-  private readonly createVehicle = new CreateVehicleUseCase(this.repository);
-  private readonly listAllVehicleUseCase = new ListAllVehiclesUseCase(this.repository);
-  private readonly findVehicleUseCase = new FindVehicleUseCase(this.repository);
-  private readonly deleteVehicleUseCase = new DeleteVehicleUseCase(this.repository);
-  private readonly updateVehicleUseCase = new UpdateVehicleUseCase(this.repository);
+  private readonly createVehicle: CreateVehicleUseCase;
+  private readonly listAllVehicleUseCase: ListAllVehiclesUseCase;
+  private readonly findVehicleUseCase: FindVehicleUseCase;
+  private readonly deleteVehicleUseCase: DeleteVehicleUseCase;
+  private readonly updateVehicleUseCase: UpdateVehicleUseCase;
+
+  constructor(private readonly repository: VehicleOrmRepository) {
+    this.createVehicle = new CreateVehicleUseCase(this.repository);
+    this.listAllVehicleUseCase = new ListAllVehiclesUseCase(this.repository);
+    this.findVehicleUseCase = new FindVehicleUseCase(this.repository);
+    this.deleteVehicleUseCase = new DeleteVehicleUseCase(this.repository);
+    this.updateVehicleUseCase = new UpdateVehicleUseCase(this.repository);
+  }
 
   async store(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const { plate } = request.body as CreateVehicleDto;

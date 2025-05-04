@@ -66,7 +66,7 @@ describe('E2E - Buscar Veículo por ID', () => {
         const responseBody = JSON.parse(response.body);
 
         expect(responseBody).toEqual({
-            message: 'Veiculo nao encontrado.'
+            message: 'Veículo não encontrado'
         });
     })
 });

@@ -6,7 +6,6 @@ import { VehiclePresenter } from '../presenter/vehicle/VehiclePresenter';
 import { ListAllVehiclesUseCase } from '../../../../core/domain/vehicle/useCase/LisAllVehicles';
 import { FindVehicleUseCase } from '../../../../core/domain/vehicle/useCase/findVehicle';
 import { DeleteVehicleUseCase } from '../../../../core/domain/vehicle/useCase/DelteVehicle';
-import { NotFound } from '../../../../shared/errors/custom/NotFound';
 import { UpdateVehicleDto } from './dto/vehicleUpdateSchemaDto';
 import { UpdateVehicleUseCase } from '../../../../core/domain/vehicle/useCase/updateVehicle';
 import { logger } from '../../../../shared/utils/logger';

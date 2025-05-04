@@ -5,7 +5,7 @@ import { createVehicleSchema } from '../../controllers/vehicle/dto/vehicleSchema
 import { updateVehicleSchema } from '../../controllers/vehicle/dto/vehicleUpdateSchemaDto';
 
 export class VehicleRouter {
-  private readonly controller = new VehicleController();
+  constructor(private readonly controller: VehicleController) {}
 
   async register(app: FastifyInstance) {
     app.post('/vehicle', {

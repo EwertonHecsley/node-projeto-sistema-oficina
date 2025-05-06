@@ -64,10 +64,4 @@ export class VehicleOrmRepository implements VehicleRepositoy {
 
     return VehicleMapper.toDomain(updated);
   }
-
-  async addVehicleToClient(vehicle: Vehicle, clientId: string): Promise<void> {
-    const data = VehicleMapper.toPersistence(vehicle, clientId);
-
-    await this.database.db.insert(vehicleSchema).values(data);
-  }
 }

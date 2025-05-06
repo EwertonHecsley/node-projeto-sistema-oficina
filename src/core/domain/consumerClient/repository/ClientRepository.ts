@@ -1,5 +1,5 @@
+import { Vehicle } from '../../vehicle/entity/Vehicle';
 import { ConsumerClient } from '../entity/ConsumerCLient';
-import { DocumentClient } from '../objectValue/Document';
 
 export abstract class ClientRepositoy {
   abstract getClientById(id: string): Promise<ConsumerClient | null>;
@@ -9,4 +9,5 @@ export abstract class ClientRepositoy {
   abstract createClient(client: ConsumerClient): Promise<ConsumerClient>;
   abstract updateClient(id: string, client: ConsumerClient): Promise<void>;
   abstract deleteClient(id: string): Promise<void>;
+  abstract addaddVehicleToClient(vehicle: Vehicle, clientId: string): Promise<void>;
 }

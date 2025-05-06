@@ -7,4 +7,5 @@ export abstract class VehicleRepositoy {
   abstract findAll(): Promise<Vehicle[]>;
   abstract update(entity: Vehicle): Promise<Vehicle>;
   abstract delete(id: string): Promise<void>;
+  abstract addVehicleToClient(vehicle: Vehicle, clientId: string): Promise<void>;
 }

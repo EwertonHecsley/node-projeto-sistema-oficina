@@ -3,6 +3,7 @@ import Identity from '../../../generics/Identity';
 
 type VehicleType = {
   plate: string;
+  clientId?: string
 };
 
 export class Vehicle extends Entity<VehicleType> {
@@ -20,5 +21,13 @@ export class Vehicle extends Entity<VehicleType> {
 
   set plate(plate: string) {
     this.properties.plate = plate;
+  }
+
+  get clientId() {
+    return this.properties.clientId!;
+  }
+
+  set clientId(clientId: string) {
+    this.properties.clientId = clientId;
   }
 }

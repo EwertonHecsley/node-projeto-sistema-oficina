@@ -39,4 +39,13 @@ export class InMemoryVeiculoRepository implements VehicleRepositoy {
 
     return updated;
   }
+
+  async addVehicleToClient(vehicle: Vehicle, clientId: string): Promise<void> {
+    const updatedVehicle = Vehicle.create({
+      plate: vehicle.plate,
+      clientId
+    })
+
+    this.veiculos.push(updatedVehicle);
+  }
 }

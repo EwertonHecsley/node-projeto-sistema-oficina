@@ -13,7 +13,7 @@ const controller = new VehicleController(vehicleRepository);
 const vehicleRoutes = new VehicleRouter(controller);
 
 const consumerClientRepository = new ConsumerClietOrmRepository();
-const consumerClientController = new ConsumerClientController(consumerClientRepository);
+const consumerClientController = new ConsumerClientController(consumerClientRepository, vehicleRepository);
 const consumerClientRoute = new ConsumerClientRoute(consumerClientController);
 
 vehicleRoutes.register(app);

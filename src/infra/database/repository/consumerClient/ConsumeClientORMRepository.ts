@@ -31,19 +31,18 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
 
     const allVehicles = await this.database.db.select().from(vehicleSchema);
 
-    const groupedVehicles = allVehicles.reduce<Record<string, typeof allVehicles>>(
+    const vehiclesByClientId = allVehicles.reduce(
       (acc, vehicle) => {
-        if (!acc[vehicle.clientId]) {
-          acc[vehicle.clientId] = [];
-        }
-        acc[vehicle.clientId].push(vehicle);
+        if (!vehicle.clientId) return acc;
+        const clientVehicles = acc[vehicle.clientId] || [];
+        acc[vehicle.clientId] = [...clientVehicles, vehicle];
         return acc;
       },
-      {},
+      {} as Record<string, (typeof vehicleSchema.$inferSelect)[]>,
     );
 
     return result.map((client) => {
-      const clientVehicles = groupedVehicles[client.id] || [];
+      const clientVehicles = vehiclesByClientId[client.id] || [];
       const domainVehicles = clientVehicles.map(VehicleMapper.toDomain);
       return ConsumerClientMapper.toDomain(client, domainVehicles);
     });

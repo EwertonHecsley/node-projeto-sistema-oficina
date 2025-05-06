@@ -1,4 +1,5 @@
 import { buildApp } from '../buildApp';
+import { InMemoryConsumerClientRepository } from '../fakeRepository/InMemoryConsumerClientRepositoy';
 import { InMemoryVeiculoRepository } from '../fakeRepository/InMemoryVeiculoRepository';
 
 describe('E2E - Buscar Veículo por ID', () => {
@@ -7,6 +8,7 @@ describe('E2E - Buscar Veículo por ID', () => {
   beforeEach(async () => {
     app = await buildApp({
       vehicleRepository: new InMemoryVeiculoRepository(),
+      consumerClientRepository: new InMemoryConsumerClientRepository(),
     });
   });
 

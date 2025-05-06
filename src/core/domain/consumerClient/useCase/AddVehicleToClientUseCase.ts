@@ -27,9 +27,9 @@ export class AddVehicleToClientUseCase {
 
     if (!plateExist) return left(new NotFound('Placa nao encontrada.'));
 
-    const vehicle = Vehicle.create({ plate });
-    await this.clientRepository.addaddVehicleToClient(vehicle, clientId);
+    const vehicle = Vehicle.create({ plate }, plateExist.valueId);
     clientExist.addVehicle(vehicle);
+    await this.clientRepository.addaddVehicleToClient(vehicle, clientId);
 
     return right(true);
   }

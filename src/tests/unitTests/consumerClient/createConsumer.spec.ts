@@ -13,6 +13,7 @@ const makeMockRepository = (): jest.Mocked<ClientRepositoy> => ({
   getAllClients: jest.fn(),
   getClientById: jest.fn(),
   updateClient: jest.fn(),
+  addaddVehicleToClient: jest.fn()
 });
 
 const validRequest = {

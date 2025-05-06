@@ -10,6 +10,7 @@ export class ConsumerClientPresenter {
       docType: entity.docType.documentValue,
       city: entity.city,
       juridicalPerson: entity.juridicalPerson,
+      vehicles: entity.vehicles,
     };
   }
 }

@@ -3,7 +3,7 @@ import Identity from '../../../generics/Identity';
 
 type VehicleType = {
   plate: string;
-  clientId?: string
+  clientId?: string;
 };
 
 export class Vehicle extends Entity<VehicleType> {

@@ -5,7 +5,7 @@ export class VehiclePresenter {
     return {
       id: entity.valueId.valueId,
       plate: entity.plate,
-      clientId: clientId ?? entity.clientId
+      clientId: clientId ?? entity.clientId,
     };
   }
 }

@@ -8,6 +8,7 @@ import {
   consumerClient as consumerClientSchema,
   vehicle as vehicleSchema,
 } from '../../drizzle/schema';
+import { Vehicle } from '../../../../core/domain/vehicle/entity/Vehicle';
 
 export class ConsumerClietOrmRepository implements ClientRepositoy {
   private database = DatabaseConnection.getInstance();
@@ -112,5 +113,15 @@ export class ConsumerClietOrmRepository implements ClientRepositoy {
 
   async deleteClient(id: string): Promise<void> {
     await this.database.db.delete(consumerClientSchema).where(eq(consumerClientSchema.id, id));
+  }
+
+  async addaddVehicleToClient(vehicle: Vehicle, clientId: string): Promise<void> {
+    const data = VehicleMapper.toPersistence(vehicle, clientId);
+
+    await this.database.db
+      .update(vehicleSchema)
+      .set({ clientId: data.clientId, plate: data.plate })
+      .where(eq(vehicleSchema.id, vehicle.valueId.valueId))
+      .returning();
   }
 }

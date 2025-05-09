@@ -7,4 +7,5 @@ export abstract class MechanicRepository {
   abstract findAll(): Promise<Mechanic[]>;
   abstract findById(id: string): Promise<Mechanic | null>;
   abstract delete(id: string): Promise<void>;
+  abstract update(entity: Mechanic): Promise<void>;
 }

@@ -9,7 +9,7 @@ import { CreateMechanicDto } from './dto/mechanicSchemaDto';
 import { logger } from '../../../../shared/utils/logger';
 import { MechanicPresenter } from '../presenter/mechanic/MechanicPresenter';
 import { mechanicParamsSchema } from './dto/mechanicSchemaParamsDto';
-import { UpdateCreateMechanicDto } from './dto/mechanicUpdateSchemaDto';
+import { UpdateMechanicDto } from './dto/mechanicUpdateSchemaDto';
 
 export class MechanicController {
   private readonly createMechanic: CreateMechanicUseCase;
@@ -121,7 +121,7 @@ export class MechanicController {
 
   async update(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const paramsValidate = mechanicParamsSchema.safeParse(request.params);
-    const { ...data } = request.body as UpdateCreateMechanicDto;
+    const { ...data } = request.body as UpdateMechanicDto;
 
     logger.error('Dados invalidos na requisicao.');
     if (!paramsValidate.success) {

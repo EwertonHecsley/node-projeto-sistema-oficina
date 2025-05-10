@@ -3,7 +3,7 @@ import { z } from 'zod';
 const cpfRegex = /^(?:\d{11}|\d{14}|\d{3}\.\d{3}\.\d{3}-\d{2}|\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const udateCreateMechanicSchema = z.object({
+export const udateMechanicSchema = z.object({
   name: z.string().nonempty('Campo nome nao pode ser vazio.').optional(),
   cpf: z
     .string()
@@ -18,4 +18,4 @@ export const udateCreateMechanicSchema = z.object({
   isAvaliable: z.boolean().optional().default(true).optional(),
 });
 
-export type UpdateCreateMechanicDto = z.infer<typeof udateCreateMechanicSchema>;
+export type UpdateMechanicDto = z.infer<typeof udateMechanicSchema>;

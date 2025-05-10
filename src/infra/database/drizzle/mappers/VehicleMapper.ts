@@ -11,7 +11,6 @@ export class VehicleMapper {
       id: vehicle.valueId.valueId,
       plate: vehicle.plate,
       clientId: clientId,
-      createdAt: new Date(),
     };
   }
 

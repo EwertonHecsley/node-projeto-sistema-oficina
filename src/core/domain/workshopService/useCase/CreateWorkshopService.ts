@@ -16,7 +16,7 @@ type Request = {
 
 type Response = Either<NotFound, WorkshopService>;
 
-export class WorkshopServiceUseCase {
+export class CreateWorkshopServiceUseCase {
     constructor(
         private readonly workshopServiceRepository: WorkshoServiceRepository,
         private readonly mechanicRepository: MechanicRepository,
